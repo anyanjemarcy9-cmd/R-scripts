@@ -1,0 +1,29 @@
+cats <- data.frame(coat = c("calico", "black", "tabby"),
+                   weight = c(2.1, 5.0, 3.2),
+                   likes_catnip = c(1, 0, 1))
+write.csv(x = cats, file = "data/feline-data.csv", row.names = FALSE)
+#cbind(data, new column)
+#nrows()
+#length(data)
+#rbind(data, new row)
+#removing raw data(-no of row, space. be in sq brackets)
+#removing columns data(space,-no of column)
+two data frames together: name of new<- rbind(data1,data2)
+df <- data.frame(first = c("Grace"),
+                 last = c("Hopper"),
+                 lucky_number = c(0))
+df <- rbind(df, list("Marie", "Curie", 238) )
+df <- cbind(df, coffeetime = c(TRUE,TRUE))
+gapminder <- read.csv("gapminder_data.csv")
+str(gapminder)
+summary(gapminder)
+typeof(gapminder$country)
+length(gapminder)
+typeof(gapminder)
+nrow(gapminder)
+ncol(gapminder)
+dim(gapminder)
+colnames(gapminder)
+head(gapminder)
+tail(gapminder, n = 15)
+gapminder[sample(nrow(gapminder), 5), ]

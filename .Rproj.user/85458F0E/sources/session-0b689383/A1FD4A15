@@ -1,0 +1,27 @@
+{
+    "id": "A1FD4A15",
+    "path": "/cloud/project/gap.R/minder.R",
+    "project_path": "gap.R/minder.R",
+    "type": "r_source",
+    "hash": "0",
+    "contents": "",
+    "dirty": false,
+    "created": 1779958373874.0,
+    "source_on_save": false,
+    "relative_order": 2,
+    "properties": {
+        "tempName": "Untitled1",
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "256,9",
+        "scrollLine": "251"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1780769205,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1780769205116,
+    "read_only": false,
+    "read_only_alternatives": []
+}

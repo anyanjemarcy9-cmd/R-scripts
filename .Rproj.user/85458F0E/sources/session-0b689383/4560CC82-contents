@@ -1,0 +1,35 @@
+View(gapminder)
+Library(gapminder)
+library(gapminder)
+View(gapminder)
+gapminder
+data("gapminder")
+names(gapminder)
+summary(gapminder)
+library(tidyverse)
+library(dplyr)
+ggplot
+#data layer
+#mapping layer
+#geometry layer
+gapminder %>%
+  filter(year == 2007) %>%
+  ggplot(aes(x = lifeExp, y = gdpPercap, color = continent))+
+  geom_point(aes(size = pop, alpha = 0.3))+
+  labs(title = "gdp vs life expectancy")
+library(plotly)
+fig <- gapminder %>%
+  filter(year == 2007) %>%
+  ggplot(aes(x = lifeExp, y = gdpPercap, color = continent, labels = country))+
+  geom_point(aes(size = pop, alpha = 0.3))+
+  labs(title = "gdp vs life expectancy")
+ggplotly(fig)
+#animate
+fig <- gapminder %>%
+  ggplot(aes(x = lifeExp, y = gdpPercap, color = continent, labels = country, frame = year))+
+  geom_point(aes(size = pop, alpha = 0.3))+
+  labs(title = "gdp vs life expectancy")
+ggplotly(fig)
+ls -lh data/gapminder_data.csv
+getwd()
+library(ggplot2)
