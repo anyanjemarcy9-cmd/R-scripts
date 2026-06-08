@@ -253,9 +253,3 @@ for (iCountry in candidateCountries) {
   } # end if
   rm(tmp)
 }
-git init
-git add .
-git commit -m "My first upload"
-git branch -M main
-git remote add origin https://github.com/anyanjemarcy9-cmd/R-scripts
-git push -u origin main
