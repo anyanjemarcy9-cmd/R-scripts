@@ -253,3 +253,386 @@ for (iCountry in candidateCountries) {
   } # end if
   rm(tmp)
 }
+library(ggplot2)
+ggplot(data = gapminder)
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp))
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(color = "blue")
+ggplot(data = gapminder, mapping = aes(x = year, y = lifeExp)) + geom_point()
+ggplot(data = gapminder, mapping = aes(x = year, y = lifeExp, color =continent)) +
+  geom_point()
+ggplot(data = gapminder, mapping = aes(x = year, y = lifeExp, color=continent)) +
+  geom_point()
+ggplot(data = gapminder, mapping = aes(x=year, y=lifeExp, color=continent)) +
+  geom_line()
+ggplot(data = gapminder, mapping = aes(x=year, y=lifeExp, group=country, color=continent)) +
+  geom_line()
+ggplot(data = gapminder, mapping = aes(x=year, y=lifeExp, group=country, color=continent)) +
+  geom_line() + geom_point()
+ggplot(data = gapminder, mapping = aes(x=year, y=lifeExp, group=country)) +
+  geom_line(mapping = aes(color=continent)) + geom_point()
+ggplot(data = gapminder, mapping = aes(x=year, y=lifeExp, group=country)) +
+  geom_point() + geom_line(mapping = aes(color=continent))
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) +
+  geom_point()
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(alpha = 0.5) + scale_x_log10()
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(alpha = 0.5) + scale_x_log10() + geom_smooth(method="lm")
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(alpha = 0.5) + scale_x_log10() + geom_smooth(method="lm", linewidth=1.5)
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp)) +
+  geom_point(size=3, color="orange") + scale_x_log10() +
+  geom_smooth(method="lm", linewidth=1.5)
+ggplot(data = gapminder, mapping = aes(x = gdpPercap, y = lifeExp, color = continent)) +
+  geom_point(size=3, shape=17) + scale_x_log10() +
+  geom_smooth(method="lm", linewidth=1.5)
+colors()
+americas <- gapminder[gapminder$continent == "Americas",]
+ggplot(data = americas, mapping = aes(x = year, y = lifeExp)) +
+  geom_line() +
+  facet_wrap( ~ country) +
+  theme(axis.text.x = element_text(angle = 45))
+library(ggplot2)
+ggplot(data = americas, mapping = aes(x = year, y = lifeExp, color=continent)) +
+  geom_line() + facet_wrap( ~ country) +
+  labs(
+    x = "Year",              # x axis title
+    y = "Life expectancy",   # y axis title
+    title = "Figure 1",      # main title of figure
+    color = "Continent"      # title of legend
+  ) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+lifeExp_plot <- ggplot(data = americas, mapping = aes(x = year, y = lifeExp, color=continent)) +
+  geom_line() + facet_wrap( ~ country) +
+  labs(
+    x = "Year",              # x axis title
+    y = "Life expectancy",   # y axis title
+    title = "Figure 1",      # main title of figure
+    color = "Continent"      # title of legend
+  ) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggsave(filename = "gap.R/pop_millions.png", plot = lifeExp_plot, width = 12, height = 10, dpi = 300, units = "cm")
+ggplot(data = gapminder, mapping = aes(x = continent, y = lifeExp, fill = continent)) +
+  geom_boxplot() + facet_wrap(~year) +
+  ylab("Life Expectancy") +
+  theme(axis.title.x=element_blank(),
+        axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+x <- 1:4
+x * 2
+y <- 6:9
+x + y
+output_vector <- c()
+for (i in 1:4) {
+  output_vector[i] <- x[i] + y[i]
+}
+output_vector
+sum_xy <- x + y
+sum_xy
+gapminder$pop_millions <- gapminder$pop / 1e6
+head(gapminder)
+ggplot(gapminder, aes(x = year, y = pop_millions)) +
+  geom_point(color = "purple")
+countryset <- c("China","India","Indonesia")
+ggplot(gapminder[gapminder$country %in% countryset,],
+       aes(x = year, y = pop_millions)) +
+  geom_point()
+#VECTORISATION
+x > 2
+a <- x > 3  # or, for clarity, a <- (x > 3)
+a
+x <- 1:4
+log(x)
+m <- matrix(1:12, nrow=3, ncol=4)
+m * -1
+m %*% matrix(1, nrow=4, ncol=1)
+matrix(1:4, nrow=1) %*% matrix(1:4, ncol=1)
+m <- matrix(1:12, nrow=3, ncol=4)
+m
+m ^ -1
+m * c(1, 0, -1)
+m > c(0, 20)
+x = 1/(1^2) + 1/(2^2) + 1/(3^2) + ... + 1/(n^2)
+sum(1/(1:100)^2)
+sum(1/(1:1e04)^2)
+n <- 10000
+sum(1/(1:n)^2)
+inverse_sum_of_squares <- function(n) {
+  sum(1/(1:n)^2)
+}
+inverse_sum_of_squares(100)
+inverse_sum_of_squares(10000)
+n <- 10000
+inverse_sum_of_squares(n)
+x <- c(1, 2, 3)
+y <- c(1, 2, 3, 4, 5, 6, 7)
+x + y
+#DEFINING FUNCTIONS
+my_function <- function(parameters) {
+  # perform action
+  # return value
+}
+fahr_to_kelvin <- function(temp) {
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}
+fahr_to_kelvin(32)
+fahr_to_kelvin(212)
+kelvin_to_celsius <- function(temp) {
+  celsius <- temp - 273.15
+  return(celsius)
+}
+fahr_to_kelvin <- function(temp) {
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}
+
+kelvin_to_celsius <- function(temp) {
+  celsius <- temp - 273.15
+  return(celsius)
+}
+fahr_to_celsius <- function(temp) {
+  temp_k <- fahr_to_kelvin(temp)
+  result <- kelvin_to_celsius(temp_k)
+  return(result)
+}
+#DEFENSIVE PROGRAMMING
+fahr_to_celsius <- function(temp) {
+  temp_k <- fahr_to_kelvin(temp)
+  result <- kelvin_to_celsius(temp_k)
+  return(result)
+}
+fahr_to_kelvin <- function(temp) {
+  stopifnot(is.numeric(temp))
+  kelvin <- ((temp - 32) * (5 / 9)) + 273.15
+  return(kelvin)
+}
+fahr_to_kelvin(temp = 32)
+fahr_to_kelvin(temp = as.factor(32))
+fahr_to_celsius <- function(temp) {
+  stopifnot(is.numeric(temp))
+  temp_k <- fahr_to_kelvin(temp)
+  result <- kelvin_to_celsius(temp_k)
+  return(result)
+}
+calcGDP <- function(dat) {
+  gdp <- dat$pop * dat$gdpPercap
+  return(gdp)
+}
+calcGDP(head(gapminder))
+calcGDP <- function(dat, year=NULL, country=NULL) {
+  if(!is.null(year)) {
+    dat <- dat[dat$year %in% year, ]
+  }
+  if (!is.null(country)) {
+    dat <- dat[dat$country %in% country,]
+  }
+  gdp <- dat$pop * dat$gdpPercap
+  
+  new <- cbind(dat, gdp=gdp)
+  return(new)
+}
+head(calcGDP(gapminder, year=2007))
+calcGDP(gapminder, country="Australia")
+calcGDP(gapminder, year=2007, country="Australia")
+calcGDP <- function(dat, year=NULL, country=NULL) 
+  if(!is.null(year)) {
+  dat <- dat[dat$year %in% year, ]
+}
+  if (!is.null(country)) {
+    dat <- dat[dat$country %in% country,]
+  }
+gdp <- dat$pop * dat$gdpPercap
+new <- cbind(dat, gdp=gdp)
+return(new)
+calcGDP(gapminder, year = c(1952, 1987), country = "New Zealand")
+best_practice <- c("Write", "programs", "for", "people", "not", "computers")
+paste(best_practice, collapse=" ")
+fence(text=best_practice, wrapper="***")
+fence <- function(text, wrapper){
+  text <- c(wrapper, text, wrapper)
+  result <- paste(text, collapse = " ")
+  return(result)
+}
+best_practice <- c("Write", "programs", "for", "people", "not", "computers")
+fence(text=best_practice, wrapper="***")
+pdf("Life_Exp_vs_time.pdf", width=12, height=4)
+ggplot(data=gapminder, aes(x=year, y=lifeExp, colour=country)) +
+  geom_line() +
+  theme(legend.position = "none")
+dev.off()
+pdf("Life_Exp_vs_time.pdf", width = 12, height = 4)
+p <- ggplot(data = gapminder, aes(x = year, y = lifeExp, colour = country)) +
+  geom_line() +
+  theme(legend.position = "none")
+p
+p + facet_grid(~continent)
+dev.off()
+aust_subset <- gapminder[gapminder$country == "Australia",]
+write.table(aust_subset,
+            file="cleaned-data/gapminder-aus.csv",
+            sep=",")
+head(cleaned-data/gapminder-aus.csv)
+?write.table
+write.table(
+  gapminder[gapminder$country == "Australia",],
+  file="cleaned-data/gapminder-aus.csv",
+  sep=",", quote=FALSE, row.names=FALSE
+)
+#DPLYR
+mean(gapminder$gdpPercap[gapminder$continent == "Africa"])
+mean(gapminder$gdpPercap[gapminder$continent == "Americas"])
+mean(gapminder$gdpPercap[gapminder$continent == "Asia"])
+library(dplyr)
+year_country_gdp <- select(gapminder, year, country, gdpPercap)
+smaller_gapminder_data <- select(gapminder, -continent)
+year_country_gdp <- gapminder %>% select(year, country, gdpPercap)
+tidy_gdp <- year_country_gdp %>% rename(gdp_per_capita = gdpPercap)
+head(tidy_gdp)
+year_country_gdp_euro <- gapminder %>%
+  filter(continent == "Europe") %>%
+  select(year, country, gdpPercap)
+europe_lifeExp_2007 <- gapminder %>%
+  filter(continent == "Europe", year == 2007) %>%
+  select(country, lifeExp)
+year_country_lifeExp_Africa <- gapminder %>%
+  filter(continent == "Africa") %>%
+  select(year, country, lifeExp)
+str(gapminder)
+str(gapminder %>% group_by(continent))
+gdp_bycontinents <- gapminder %>%
+  group_by(continent) %>%
+  summarize(mean_gdpPercap = mean(gdpPercap))
+lifeExp_bycountry <- gapminder %>%
+  group_by(country) %>%
+  summarize(mean_lifeExp = mean(lifeExp))
+lifeExp_bycountry %>%
+  filter(mean_lifeExp == min(mean_lifeExp) | mean_lifeExp == max(mean_lifeExp))
+lifeExp_bycountry %>%
+  arrange(mean_lifeExp) %>%
+  head(1)
+lifeExp_bycountry %>%
+  arrange(desc(mean_lifeExp)) %>%
+  head()
+lifeExp_bycountry %>%
+  arrange(desc(country)) %>%
+  head()
+gdp_bycontinents_byyear <- gapminder %>%
+  group_by(continent, year) %>%
+  summarize(mean_gdpPercap = mean(gdpPercap))
+gdp_pop_bycontinents_byyear <- gapminder %>%
+  group_by(continent, year) %>%
+  summarize(mean_gdpPercap = mean(gdpPercap),
+            sd_gdpPercap = sd(gdpPercap),
+            mean_pop = mean(pop),
+            sd_pop = sd(pop))
+gapminder %>%
+  filter(year == 2002) %>%
+  count(continent, sort = TRUE)
+gapminder %>%
+  group_by(continent) %>%
+  summarize(se_le = sd(lifeExp)/sqrt(n()))
+gapminder %>%
+  group_by(continent) %>%
+  summarize(
+    mean_le = mean(lifeExp),
+    min_le = min(lifeExp),
+    max_le = max(lifeExp),
+    se_le = sd(lifeExp)/sqrt(n()))
+gdp_pop_bycontinents_byyear <- gapminder %>%
+  mutate(gdp_billion = gdpPercap*pop/10^9) %>%
+  group_by(continent,year) %>%
+  summarize(mean_gdpPercap = mean(gdpPercap),
+            sd_gdpPercap = sd(gdpPercap),
+            mean_pop = mean(pop),
+            sd_pop = sd(pop),
+            mean_gdp_billion = mean(gdp_billion),
+            sd_gdp_billion = sd(gdp_billion))
+gdp_pop_bycontinents_byyear_above25 <- gapminder %>%
+  mutate(gdp_billion = ifelse(lifeExp > 25, gdpPercap * pop / 10^9, NA)) %>%
+  group_by(continent, year) %>%
+  summarize(mean_gdpPercap = mean(gdpPercap),
+            sd_gdpPercap = sd(gdpPercap),
+            mean_pop = mean(pop),
+            sd_pop = sd(pop),
+            mean_gdp_billion = mean(gdp_billion),
+            sd_gdp_billion = sd(gdp_billion))
+gdp_future_bycontinents_byyear_high_lifeExp <- gapminder %>%
+  mutate(gdp_futureExpectation = ifelse(lifeExp > 40, gdpPercap * 1.5, gdpPercap)) %>%
+  group_by(continent, year) %>%
+  summarize(mean_gdpPercap = mean(gdpPercap),
+            mean_gdpPercap_expected = mean(gdp_futureExpectation))
+ggplot(data = americas, mapping = aes(x = year, y = lifeExp)) +
+  geom_line() +
+  facet_wrap( ~ country) +
+  theme(axis.text.x = element_text(angle = 45))
+gapminder %>%
+  # extract first letter of country name into new column
+  mutate(startsWith = substr(country, 1, 1)) %>%
+  # only keep countries starting with A or Z
+  filter(startsWith %in% c("A", "Z")) %>%
+  # plot lifeExp into facets
+  ggplot(aes(x = year, y = lifeExp, colour = continent)) +
+  geom_line() +
+  facet_wrap(vars(country)) +
+  theme_minimal()
+lifeExp_2countries_bycontinents <- gapminder %>%
+  filter(year==2002) %>%
+  group_by(continent) %>%
+  slice_sample(n=2) %>%
+  summarize(mean_lifeExp=mean(lifeExp)) %>%
+  arrange(desc(mean_lifeExp))
+library(tidyr)
+str(gapminder)
+gap_wide <- read.csv("gapminder_data.csv", stringsAsFactors = FALSE)
+str(gap_wide)
+gap_long <- gap_wide %>%
+  pivot_longer(
+    cols = c(starts_with('pop'), starts_with('lifeExp'), starts_with('gdpPercap')),
+    names_to = "obstype_year", values_to = "obs_values"
+  )
+str(gap_long)
+gap_long <- gap_wide %>%
+  pivot_longer(
+    cols = c(-continent, -country),
+    names_to = "obstype_year", values_to = "obs_values"
+  )
+str(gap_long)
+gap_long <- gap_long %>% separate(obstype_year, into = c('obs_type', 'year'), sep = "_")
+gap_long$year <- as.integer(gap_long$year)
+gap_long %>% group_by(continent, obs_type) %>%
+  summarize(means=mean(obs_values))
+gap_normal <- gap_long %>%
+  pivot_wider(names_from = obs_type, values_from = obs_values)
+dim(gap_normal)
+dim(gapminder)
+names(gap_normal)
+names(gapminder)
+gap_normal <- gap_normal[, names(gapminder)]
+all.equal(gap_normal, gapminder)
+gap_normal <- gap_long %>%
+  pivot_wider(names_from = obs_type, values_from = obs_values)
+dim(gap_normal)
+gap_temp <- gap_long %>% unite(var_ID, continent, country, sep = "_")
+str(gap_temp)
+gap_temp <- gap_long %>%
+  unite(ID_var, continent, country, sep = "_") %>%
+  unite(var_names, obs_type, year, sep = "_")
+str(gap_temp)
+gap_wide_new <- gap_long %>%
+  unite(ID_var, continent, country, sep = "_") %>%
+  unite(var_names, obs_type, year, sep = "_") %>%
+  pivot_wider(names_from = var_names, values_from = obs_values)
+str(gap_wide_new)
+gap_ludicrously_wide <- gap_long %>%
+  unite(var_names, obs_type, year, country, sep = "_") %>%
+  pivot_wider(names_from = var_names, values_from = obs_values)
+gap_wide_betterID <- separate(gap_wide_new, ID_var, c("continent", "country"), sep="_")
+gap_wide_betterID <- gap_long %>%
+  unite(ID_var, continent, country, sep = "_") %>%
+  unite(var_names, obs_type, year, sep = "_") %>%
+  pivot_wider(names_from = var_names, values_from = obs_values) %>%
+  separate(ID_var, c("continent","country"), sep = "_")
+str(gap_wide_betterID)
+all.equal(gap_wide, gap_wide_betterID)

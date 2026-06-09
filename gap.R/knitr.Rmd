@@ -1,0 +1,23 @@
+# Introduction
+
+## Background on Data
+
+This report uses the *gapminder* dataset, which has columns that include:
+
+* country
+* continent
+* year
+* lifeExp
+* pop
+* gdpPercap
+
+## Background on Methods
+```{r load-ggplot2}
+library("ggplot2")
+```
+```{r read-gapminder-data}
+gapminder <- read.csv("gapminder.csv")
+```
+```{r make-plot}
+plot(lifeExp ~ year, data = gapminder)
+```
